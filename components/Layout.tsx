@@ -19,7 +19,7 @@ const Layout: React.FunctionComponent<Props> = ({
     <header>
       <nav>
         <Link href="/">
-          <a>Home</a>
+          <a className="test">Home</a>
         </Link>{' '}
         |{' '}
         <Link href="/about">

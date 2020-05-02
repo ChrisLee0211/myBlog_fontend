@@ -3,7 +3,7 @@ import App, {AppContext} from 'next/app'
 import React from 'react'
 import {initializeStore, Store} from '../stores'
 import {Provider} from 'mobx-react'
-import '../components/index.scss'
+import "./index.scss"
 class MyMobxApp extends App {
 
   mobxStore: Store

@@ -26,12 +26,20 @@
         &-logo{
             height: 100%;
             @include flexCenter;
+            font-size: 20px;
+            font-weight: bolder;
+            color: white;
+            font-family: Verdana, Geneva, Tahoma, sans-serif
         }
         // 响应式按钮
         &-btn{
             display: none;
             width: 8vh;
             height: 8vh;
+           & img{
+               width: 80%;
+               height: 80%
+           }
         }
         // 菜单内容
         &-content{
@@ -42,14 +50,20 @@
                 margin: 0 5px;
                 padding: 0 10px;
                 @include flexCenter;
-                transition: background-color .3s ease-in-out;
+                transition: all .3s ease-in-out;
                 cursor: pointer;
                 &:hover{
                     background-color: lightblue;
+                    transform: scale(1.1)
                 }
             }
         }
     }
+}
+
+.menu-btn-active{
+    background-color: lightblue;
+    transform: rotate(90deg)
 }
 
 // 响应式样式

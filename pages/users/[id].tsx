@@ -52,6 +52,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 // It won't be called on client-side, so you can even do
 // direct database queries.
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  console.log(params)
   try {
     const id = params?.id
     const item = sampleUserData.find(data => data.id === Number(id))

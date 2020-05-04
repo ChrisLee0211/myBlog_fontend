@@ -1,5 +1,5 @@
 import React, { useRef, useState, useCallback } from 'react';
-
+import Link from "next/link";
 export interface ComponentProps {
 
 }
@@ -27,7 +27,9 @@ const MainHeader: React.FC<ComponentProps> = () => {
                     <img onTouchEnd={clickBtn} src={"../static/menu.svg"} alt="" />
                 </section>
                 <ul className="header-menu-content" >
-                    <li className="header-menu-content-item">首页</li>
+                    <li className="header-menu-content-item">
+                        <Link href={"/blog"} as={`/blog`}>首页</Link>
+                    </li>
                     <li className="header-menu-content-item">分类</li>
                     <li className="header-menu-content-item">项目</li>
                     <li className="header-menu-content-item">关于我</li>

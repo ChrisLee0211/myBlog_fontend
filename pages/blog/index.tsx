@@ -26,7 +26,7 @@ export const getStaticProps:GetStaticProps = async () => {
             desc:'测试描述'
         },
         {
-            id:1,
+            id:2,
             image:'',
             created_at:1892038421,
             update_at:12937384463,
@@ -36,7 +36,7 @@ export const getStaticProps:GetStaticProps = async () => {
             desc:'测试描述'
         },
         {
-            id:1,
+            id:3,
             image:'',
             created_at:1892038421,
             update_at:12937384463,
@@ -60,22 +60,26 @@ const Blog: React.FC<ComponentProps> = (props: ComponentProps) => {
     return (
         <Layout>
         <div className="blog-wrapper">
-           {
-               items.map(record => {
-                   return (
-                       <div className="blog-content">
-                           <section className="blog-content-date">{record.created_at}</section>
-                           <section className="blog-content-desc">
-                               <div className="blog-content-desc-img"></div>
-                               <div className="blog-content-desc-text"></div>
-                           </section>
-                           <section className="blog-content-desc-comment">
-                               <span className="read">{record.read}</span>
-                           </section>
-                       </div>
-                   )
-               })
-           }
+            <div className="blog-body">
+                {
+                    items.map(record => {
+                        return (
+                            <div className="blog-content" key={record.id}>
+                                <section className="blog-content-date">{record.created_at}</section>
+                                <section className="blog-content-desc">
+                                    <div className="blog-content-desc-img">
+                                        <img src={record.image} alt=""/>
+                                    </div>
+                                    <div className="blog-content-desc-text">{record.desc}</div>
+                                </section>
+                                <section className="blog-content-comment">
+                                    <span className="read">{record.read}</span>
+                                </section>
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
         </Layout>
     )

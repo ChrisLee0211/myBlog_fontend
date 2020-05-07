@@ -1,5 +1,4 @@
-import React, { useRef, useState, useCallback } from 'react';
-// import Link from "next/link";
+import React, { useRef, useState, useCallback, useMemo } from 'react';
 import Router from 'next/router'
 export interface ComponentProps {
 
@@ -10,6 +9,7 @@ const MainHeader: React.FC<ComponentProps> = () => {
     const [btnClass, setBtnClass] = useState<string>('header-menu-btn');
     const [menuVisible, setMenuVisible] = useState<boolean>(false);
     const [menuBottom, setMenuBottom] = useState<string>('32vh');
+    const [current,setCurrent] = useState<string>("/blgo")
     const clickBtn = useCallback(() => {
         setMenuVisible(!menuVisible);
         if (menuVisible === true) {
@@ -20,11 +20,20 @@ const MainHeader: React.FC<ComponentProps> = () => {
             setMenuBottom('32vh')
         }
     }, [menuVisible])
-    const goToBlog = useCallback(()=>{
+    const goToPath = useCallback((path,val)=>{
         Router.push({
-            pathname:'/blog'
-        },'/blog')
+            pathname:path
+        },path);
+        setCurrent(val)
     },[])
+    const menuList = useMemo(()=>{
+        return [
+            {path:"/blgo",value:"blgo",label:"首页",active:true},
+            {path:"/category",value:"category",label:"分类",active:false},
+            {path:"/project",value:"project",label:"项目",active:false},
+            {path:"/about",value:"about",label:"关于我",active:false},
+        ]
+    },[current]);
     return (
         <div ref={headerRef} className="header-wrapper">
             <div className="header-menu">
@@ -33,19 +42,37 @@ const MainHeader: React.FC<ComponentProps> = () => {
                     <img onTouchEnd={clickBtn} src={"../static/menu.svg"} alt="" />
                 </section>
                 <ul className="header-menu-content" >
-                    <li className="header-menu-content-item" onClick={goToBlog}>
-                            首页
-                    </li>
-                    <li className="header-menu-content-item">分类</li>
-                    <li className="header-menu-content-item">项目</li>
-                    <li className="header-menu-content-item">关于我</li>
+                    {
+                        menuList.map((record) => {
+                            return (
+                                <li 
+                                    className="header-menu-content-item"
+                                    style={{background:record.active?"lightblue":"none"}}
+                                    onClick={()=>{goToPath(record.path,record.value)}}
+                                    key={record.value}
+                                    >
+                                    {record.label}
+                                </li>
+                            )
+                        })
+                    }
                 </ul>
             </div>
             <ul className="header-menu-flexContent" style={{ bottom: menuBottom }}>
-                <li className="header-menu-flexContent-item">首页</li>
-                <li className="header-menu-flexContent-item">分类</li>
-                <li className="header-menu-flexContent-item">项目</li>
-                <li className="header-menu-flexContent-item">关于我</li>
+            {
+                        menuList.map((record) => {
+                            return (
+                                <li 
+                                    className="header-menu-flexContent-item"
+                                    style={{background:record.active?"lightblue":"none"}}
+                                    onClick={()=>{goToPath(record.path,record.value)}}
+                                    key={record.value}
+                                    >
+                                    {record.label}
+                                </li>
+                            )
+                        })
+            }
             </ul>
         </div>
     )

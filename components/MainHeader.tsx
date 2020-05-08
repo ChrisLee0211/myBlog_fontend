@@ -28,7 +28,7 @@ const MainHeader: React.FC<ComponentProps> = () => {
     },[])
     const menuList = useMemo(()=>{
         return [
-            {path:"/blgo",value:"blgo",label:"首页",active:true},
+            {path:"/blog",value:"blog",label:"首页",active:true},
             {path:"/category",value:"category",label:"分类",active:false},
             {path:"/project",value:"project",label:"项目",active:false},
             {path:"/about",value:"about",label:"关于我",active:false},

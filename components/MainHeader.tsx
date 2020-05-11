@@ -1,15 +1,14 @@
-import React, { useRef, useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, memo } from 'react';
 import Router from 'next/router'
 export interface ComponentProps {
 
 }
 
 const MainHeader: React.FC<ComponentProps> = () => {
-    const headerRef = useRef<HTMLDivElement>(null);
     const [btnClass, setBtnClass] = useState<string>('header-menu-btn');
     const [menuVisible, setMenuVisible] = useState<boolean>(false);
     const [menuBottom, setMenuBottom] = useState<string>('32vh');
-    const [current,setCurrent] = useState<string>("/blgo")
+    const [current,setCurrent] = useState<string>("blog")
     const clickBtn = useCallback(() => {
         setMenuVisible(!menuVisible);
         if (menuVisible === true) {
@@ -21,21 +20,30 @@ const MainHeader: React.FC<ComponentProps> = () => {
         }
     }, [menuVisible])
     const goToPath = useCallback((path,val)=>{
+        setCurrent(val)
         Router.push({
             pathname:path
         },path);
-        setCurrent(val)
-    },[])
+    },[current])
     const menuList = useMemo(()=>{
-        return [
-            {path:"/blog",value:"blog",label:"首页",active:true},
-            {path:"/category",value:"category",label:"分类",active:false},
-            {path:"/project",value:"project",label:"项目",active:false},
-            {path:"/about",value:"about",label:"关于我",active:false},
+        const menuArr = [
+            {path:"/blog",value:"blog",label:"首页"},
+            {path:"/category",value:"category",label:"分类"},
+            {path:"/project",value:"project",label:"项目"},
+            {path:"/about",value:"about",label:"关于我"},
         ]
+        console.log("current",current)
+        return menuArr.map(v => {
+            return {
+                path: v.path,
+                value: v.value,
+                label: v.label,
+                active: v.value === current? true:false
+            }
+        })
     },[current]);
     return (
-        <div ref={headerRef} className="header-wrapper">
+        <div className="header-wrapper">
             <div className="header-menu">
                 <section className="header-menu-logo">CLee's Blog</section>
                 <section className={btnClass}>
@@ -78,4 +86,4 @@ const MainHeader: React.FC<ComponentProps> = () => {
     )
 }
 
-export default MainHeader
+export default memo(MainHeader)

@@ -33,11 +33,8 @@ service.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.message === 'Request failed with status code 401') {
-      let secondsToGo:number = 3;
-    } else {
+
       console.log(error);
-    }
     return Promise.reject(error);
   });
 

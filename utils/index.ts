@@ -45,3 +45,10 @@ interface FormatObj {
     return time_str;
   }
   
+  export const formatDate = (timestamp: number) => {
+    let Time = new Date(timestamp);
+    let year:number = Time.getFullYear();
+    let month:number = Time.getMonth() + 1;
+    let date:number = Time.getDate();
+    return `${year}.${month}.${date}`
+  }

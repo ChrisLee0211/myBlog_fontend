@@ -1,5 +1,7 @@
 import React, { useState, useCallback, useMemo, memo } from 'react';
+import {useRouter} from "next/router";
 import Router from 'next/router'
+
 export interface ComponentProps {
 
 }
@@ -8,7 +10,9 @@ const MainHeader: React.FC<ComponentProps> = () => {
     const [btnClass, setBtnClass] = useState<string>('header-menu-btn');
     const [menuVisible, setMenuVisible] = useState<boolean>(false);
     const [menuBottom, setMenuBottom] = useState<string>('32vh');
-    const [current,setCurrent] = useState<string>("blog")
+    // const [current,setCurrent] = useState<string>("blog");
+    const route = useRouter();;
+    const {pathname} = route
     const clickBtn = useCallback(() => {
         setMenuVisible(!menuVisible);
         if (menuVisible === true) {
@@ -19,12 +23,11 @@ const MainHeader: React.FC<ComponentProps> = () => {
             setMenuBottom('32vh')
         }
     }, [menuVisible])
-    const goToPath = useCallback((path,val)=>{
-        setCurrent(val)
+    const goToPath = useCallback((path)=>{
         Router.push({
             pathname:path
         },path);
-    },[current])
+    },[])
     const menuList = useMemo(()=>{
         const menuArr = [
             {path:"/blog",value:"blog",label:"首页"},
@@ -32,16 +35,15 @@ const MainHeader: React.FC<ComponentProps> = () => {
             {path:"/project",value:"project",label:"项目"},
             {path:"/about",value:"about",label:"关于我"},
         ]
-        console.log("current",current)
         return menuArr.map(v => {
             return {
                 path: v.path,
                 value: v.value,
                 label: v.label,
-                active: v.value === current? true:false
+                active: v.path === pathname? true:false
             }
         })
-    },[current]);
+    },[pathname]);
     return (
         <div className="header-wrapper">
             <div className="header-menu">
@@ -56,7 +58,7 @@ const MainHeader: React.FC<ComponentProps> = () => {
                                 <li 
                                     className="header-menu-content-item"
                                     style={{background:record.active?"lightblue":"none"}}
-                                    onClick={()=>{goToPath(record.path,record.value)}}
+                                    onClick={()=>{goToPath(record.path)}}
                                     key={record.value}
                                     >
                                     {record.label}
@@ -73,7 +75,7 @@ const MainHeader: React.FC<ComponentProps> = () => {
                                 <li 
                                     className="header-menu-flexContent-item"
                                     style={{background:record.active?"lightblue":"none"}}
-                                    onClick={()=>{goToPath(record.path,record.value)}}
+                                    onClick={()=>{goToPath(record.path)}}
                                     key={record.value}
                                     >
                                     {record.label}

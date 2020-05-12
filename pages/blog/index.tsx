@@ -1,7 +1,7 @@
 import React from 'react';
 import {GetStaticProps} from 'next';
 import Layout from '../../components/Layout'
-import { parseTime } from "../../utils/index"
+import { formatDate } from "../../utils/index"
 interface BlogItem {
     id:number,
     image:string,
@@ -79,15 +79,15 @@ const Blog: React.FC<ComponentProps> = (props: ComponentProps) => {
     const {items} = props
     return (
         <Layout>
-        <div className="blog-wrapper">
-            <div className="blog-body">
+        <div className="main-wrapper">
+            <div className="main-body">
                 {
                     items.map(record => {
                         return (
                             <div className="blog-content" key={record.id}>
                                 <section className="blog-content-title">{record.title}</section>
                                 <section className="blog-content-date">
-                                    创建日期： {parseTime(record.created_at)}
+                                    创建日期： {formatDate(record.created_at)}
                                     {record.tag.map((tag,index) => {
                                         return (
                                             <span key={index} className="blog-content-tag"><img src="../../static/tag.svg" alt=""/><a>{tag}</a></span>

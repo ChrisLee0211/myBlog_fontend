@@ -1,178 +1,213 @@
 @mixin flexCenter {
-    display: flex;
+    display        : flex;
     justify-content: center;
-    align-items: center;
+    align-items    : center;
 }
-.layout-wrapper{
-    width: 100%;
+
+.layout-wrapper {
+    width : 100%;
     height: 100%
 }
 
 // 头部栏样式
-.header-wrapper{
-    width: 100%;
-    height: 8vh;
-    background: rgb(11, 54, 68);
-    color: white;
-    position: fixed;
-    top: 0;
-    .header-menu{
-        max-width: 768px;
-        min-width: 320px;
-        background: rgb(11, 54, 68);
-        position: absolute;
-        left: 0;
-        right: 0;
-        height: 100%;
-        margin: auto;
-        display: flex;
+.header-wrapper {
+    width     : 100%;
+    height    : 8vh;
+    background: black;
+    color     : white;
+    position  : fixed;
+    top       : 0;
+
+    .header-menu {
+        max-width      : 768px;
+        min-width      : 320px;
+        background     : black;
+        position       : absolute;
+        left           : 0;
+        right          : 0;
+        height         : 100%;
+        margin         : auto;
+        display        : flex;
         justify-content: space-between;
-        z-index: 99;
+        z-index        : 99;
+
         // 头部logo
-        &-logo{
+        &-logo {
             height: 100%;
             @include flexCenter;
-            font-size: 20px;
+            font-size  : 20px;
             font-weight: bolder;
-            color: white;
+            color      : white;
             font-family: Verdana, Geneva, Tahoma, sans-serif
         }
+
         // 响应式按钮
-        &-btn{
+        &-btn {
             display: none;
-            width: 8vh;
-            height: 8vh;
-           & img{
-               width: 80%;
-               height: 80%
-           }
+            width  : 8vh;
+            height : 8vh;
+
+            & img {
+                width : 80%;
+                height: 80%
+            }
         }
+
         // 菜单内容
-        &-content{
+        &-content {
             height: 100%;
             @include flexCenter;
-            &-item{
-                height: 100%;
-                margin: 0 5px;
+
+            &-item {
+                height : 100%;
+                margin : 0 5px;
                 padding: 0 10px;
                 @include flexCenter;
                 transition: all .3s ease-in-out;
-                cursor: pointer;
-                &:hover{
+                cursor    : pointer;
+
+                &:hover {
                     background-color: lightblue;
-                    transform: scale(1.1)
+                    transform       : scale(1.1)
                 }
             }
         }
+
         //响应式菜单内容
-        &-flexContent{
+        &-flexContent {
             display: none;
         }
     }
 }
 
-.header-menu-btn-active{
+.header-menu-btn-active {
     background-color: lightblue;
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    width: 8vh;
-    height: 8vh;
-    & img{
-        width: 80%;
-        height: 80%;
+    display         : flex !important;
+    justify-content : center;
+    align-items     : center;
+    width           : 8vh;
+    height          : 8vh;
+
+    & img {
+        width     : 80%;
+        height    : 80%;
         transition: all .2s ease-in-out;
-        transform: rotate(90deg)
+        transform : rotate(90deg)
     }
 }
 
 // 所有页面基础样式
-.main-wrapper{
+.main-wrapper {
+    width     : 100vw;
+    margin-top: 8vh;
+    height    : 100%;
+
+}
+
+.main-cover {
     width: 100vw;
     margin-top: 8vh;
-    height: 100%;
-    .main-body{
-        max-width: 768px;
-        min-width: 320px;
-        margin: 0 auto;
+    & img {
+        width : 100%;
+        height: auto;
+        max-height: 500px;
     }
 }
 
+.main-body {
+    max-width: 768px;
+    min-width: 320px;
+    margin   : 0 auto;
+}
+
 // 博客页样式
-.blog-content{
-    width: 100%;
-    padding: 2vw;
+.blog-content {
+    width        : 100%;
+    padding      : 2vw;
     border-radius: 5px;
-    box-sizing: border-box;
+    box-sizing   : border-box;
     border-bottom: 1px solid rgb(214, 214, 214);
-    &:hover{
+
+    &:hover {
         box-shadow: 0px 0px 2px 0px grey;
-        background:rgba($color: rgb(214, 214, 214), $alpha: 0.1)
+        background: rgba($color: rgb(214, 214, 214), $alpha: 0.1)
     }
+
     &-tag {
         display: flex;
-        margin: 0 5px;
-            & img{
-                margin: 0 2px;
-                width: 12px;
-                height: 12px;
+        margin : 0 5px;
+
+        & img {
+            margin: 0 2px;
+            width : 12px;
+            height: 12px;
+        }
+
+        & a {
+            cursor: pointer;
+            color : gray;
+
+            &:hover {
+                color: black;
             }
-            & a {
-                cursor: pointer;
-                color: gray;
-                &:hover {
-                    color: black;
-                }
-            }
+        }
     }
-    &-title{
-        font-size: 18px;
-        font-weight: bolder;
-        color: black;
-        text-align: start;
+
+    &-title {
+        font-size    : 18px;
+        font-weight  : bolder;
+        color        : black;
+        text-align   : start;
         margin-bottom: 5px;
     }
-    &-date{
-        width: 100%;
+
+    &-date {
+        width    : 100%;
         font-size: 10px;
-        color: grey;
+        color    : grey;
         @include flexCenter;
         justify-content: flex-start !important;
-        margin-bottom: 5px;
+        margin-bottom  : 5px;
     }
+
     &-desc {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        flex-wrap: nowrap;
+        width          : 100%;
+        display        : flex;
+        align-items    : center;
+        flex-wrap      : nowrap;
         text-decoration: none;
-        margin-bottom: 5px;
+        margin-bottom  : 5px;
+
         &-img {
-            width: 200px;
-            height:100px;
+            width : 200px;
+            height: 100px;
             margin: 10px;
-            & img{
-                width: 100%;
+
+            & img {
+                width : 100%;
                 height: 100%;
             }
         }
+
         &-text {
-            text-align: start;
-            font-size: 15px;
-            margin: 10px 12px;
-            flex:1;
+            text-align : start;
+            font-size  : 15px;
+            margin     : 10px 12px;
+            flex       : 1;
             line-height: 3vh;
-            color: black;
-            overflow: hidden;
+            color      : black;
+            overflow   : hidden;
         }
     }
-    &-comment{
+
+    &-comment {
         width: 100%;
         @include flexCenter;
         justify-content: flex-end !important;
+
         .read {
             font-size: 10px;
-            color:grey;
+            color    : grey;
         }
     }
 }
@@ -180,43 +215,45 @@
 // 分类页样式
 .category-content {
     width: 100%;
-    &-cover {
-        width: 100%;
-        height: auto;
-        margin-bottom: 5px;
-        & img{
-            width: 100%;
-            height: 100%
-        }
-    }
+
     &-tags {
-        width: 100%;
+        width     : 100%;
+        margin-top: 10px;
+
         &-title {
-            display: flex;
-            font-size: 30px;
-            font-weight: bolder;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: black;
+            display      : flex;
+            font-size    : 30px;
+            font-weight  : bolder;
+            font-family  : 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color        : black;
             margin-bottom: 10px;
-            & img{
+
+            & img {
                 margin: 0 5px;
-                width: 30px;
+                width : 30px;
                 height: 30px;
             }
         }
+
         &-list {
             display: flex;
+
             & li {
-                margin-right: 10px;
+                margin-right : 10px;
                 margin-bottom: 5px;
-                padding: 5px 8px;
-                box-sizing: border-box;
-                background: #0b3644;
-                color: white;
-                font-size: 8px !important;
+                padding      : 5px 10px;
+                box-sizing   : border-box;
+                color        : #0b3644;
+                font-size    : 8px !important;
                 @include flexCenter;
                 border-radius: 10px;
-                box-shadow: 0px 0px 1px gray;
+                box-shadow   : 0px 0px 1px gray;
+
+                &:hover {
+                    background: #0b3644;
+                    color     : white;
+                    cursor    : pointer;
+                }
             }
         }
 
@@ -225,119 +262,138 @@
 
 // 响应式样式
 @media screen and (max-width:768px) {
+
     // 顶部栏变化
-   .header-menu{
-       &-btn{
-        display: flex !important;
-        justify-content: center;
-        align-items: center;
-        & img{
-            transition: all .2s ease-in-out;
-            transform: rotate(0deg)
+    .header-menu {
+        &-btn {
+            display        : flex !important;
+            justify-content: center;
+            align-items    : center;
+
+            & img {
+                transition: all .2s ease-in-out;
+                transform : rotate(0deg)
+            }
         }
-       }
-       &-content{
-           display: none !important;
-       }
-       &-flexContent{
-           width: 100vw;
-           height: auto !important;
-           display: flex !important;
-           flex-flow: column;
-           position: absolute;
-           background: rgb(11, 54, 68);
-           bottom: 32vh;
-           transition: all .3s ease-in-out;
-           z-index: 98;
-           &-item{
-               width: 100%;
-               height: 5vh !important;
-               border-bottom: 1px solid gray;
-               box-sizing: border-box;
-               display: flex;
-               justify-content: flex-start;
-               align-items: center;
-           }
-       }
-   }
+
+        &-content {
+            display: none !important;
+        }
+
+        &-flexContent {
+            width     : 100vw;
+            height    : auto !important;
+            display   : flex !important;
+            flex-flow : column;
+            position  : absolute;
+            background: rgb(11, 54, 68);
+            bottom    : 32vh;
+            transition: all .3s ease-in-out;
+            z-index   : 98;
+
+            &-item {
+                width          : 100%;
+                height         : 5vh !important;
+                border-bottom  : 1px solid gray;
+                box-sizing     : border-box;
+                display        : flex;
+                justify-content: flex-start;
+                align-items    : center;
+            }
+        }
+    }
+
     //博客页变化
-    .blog-content{
-        width: 100%;
-        padding: 2vw;
+    .blog-content {
+        width        : 100%;
+        padding      : 2vw;
         border-radius: 5px;
-        box-sizing: border-box;
+        box-sizing   : border-box;
         border-bottom: 1px solid rgb(214, 214, 214);
-        &:hover{
+
+        &:hover {
             box-shadow: 0px 0px 2px 0px grey;
-            background:rgba($color: rgb(214, 214, 214), $alpha: 0.1)
+            background: rgba($color: rgb(214, 214, 214), $alpha: 0.1)
         }
+
         &-tag {
             display: flex;
-            margin: 0 5px;
-                & img{
-                    margin: 0 2px;
-                    width: 12px;
-                    height: 12px;
+            margin : 0 5px;
+
+            & img {
+                margin: 0 2px;
+                width : 12px;
+                height: 12px;
+            }
+
+            & a {
+                cursor: pointer;
+                color : gray;
+
+                &:hover {
+                    color: black;
                 }
-                & a {
-                    cursor: pointer;
-                    color: gray;
-                    &:hover {
-                        color: black;
-                    }
-                }
+            }
         }
-        &-title{
-            font-size: 18px;
-            font-weight: bolder;
-            color: black;
-            text-align: start;
+
+        &-title {
+            font-size    : 18px;
+            font-weight  : bolder;
+            color        : black;
+            text-align   : start;
             margin-bottom: 5px;
         }
-        &-date{
-            width: 100%;
+
+        &-date {
+            width    : 100%;
             font-size: 10px;
-            color: grey;
+            color    : grey;
             @include flexCenter;
             justify-content: flex-start !important;
-            margin-bottom: 5px;
+            margin-bottom  : 5px;
         }
+
         &-desc {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            flex-flow: column;
+            width          : 100%;
+            display        : flex;
+            align-items    : center;
+            flex-flow      : column;
             text-decoration: none;
-            margin-bottom: 5px;
+            margin-bottom  : 5px;
+
             &-img {
-                width: 100%;
-                height:100px;
+                width   : 100%;
+                height  : 100px;
                 overflow: hidden;
-                margin: 5px;
-                & img{
-                    width: 100%;
+                margin  : 5px;
+
+                & img {
+                    width : 100%;
                     height: auto;
                 }
             }
+
             &-text {
-                width: 100%;
-                max-height: 50px;
-                overflow: hidden;
+                width             : 100%;
+                max-height        : 50px;
+                overflow          : hidden;
                 /*将对象作为弹性伸缩盒子模型显示*/
-                display: -webkit-box;
+                display           : -webkit-box;
                 /*设置子元素排列方式*/
                 -webkit-box-orient: vertical;
                 /*设置显示的行数，多出的部分会显示为...*/
                 -webkit-line-clamp: 2;
             }
         }
-        &-comment{
+
+        &-comment {
             width: 100%;
             @include flexCenter;
             justify-content: flex-end !important;
+
             .read {
                 font-size: 10px;
-                color:grey;
+                color    : grey;
             }
         }
     }

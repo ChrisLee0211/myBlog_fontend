@@ -2,7 +2,7 @@ import React from 'react';
 import {GetStaticProps} from 'next';
 import Layout from '../../components/Layout'
 import { formatDate } from "../../utils/index"
-interface BlogItem {
+export  interface BlogItem {
     id:number,
     image:string,
     created_at:number,

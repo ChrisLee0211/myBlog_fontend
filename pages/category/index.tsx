@@ -2,6 +2,7 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 import Layout from '../../components/Layout'
 import { formatDate } from '../../utils';
+import "./index.scss";
 
 interface Tags {
     label: string;

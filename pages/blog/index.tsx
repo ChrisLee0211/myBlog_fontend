@@ -1,7 +1,8 @@
 import React from 'react';
 import {GetStaticProps} from 'next';
-import Layout from '../../components/Layout'
-import { formatDate } from "../../utils/index"
+import Layout from '../../components/Layout';
+import { formatDate } from "../../utils/index";
+import "./index.scss";
 export  interface BlogItem {
     id:number,
     image:string,

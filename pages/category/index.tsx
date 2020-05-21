@@ -60,7 +60,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const FComponent: React.FC<ComponentProps> = (props: ComponentProps) => {
     const {tags, category} = props;
-    console.log(category)
     return (
         <Layout>
             <div className="main-cover">
@@ -86,7 +85,7 @@ const FComponent: React.FC<ComponentProps> = (props: ComponentProps) => {
                                     <div className="category-content-list-item-blogs">
                                         {item.blogs.map(blog => {
                                             return (
-                                                <div className="category-content-list-item-blogs-item">
+                                                <div key={blog.id} className="category-content-list-item-blogs-item">
                                                     <div className="category-content-list-item-blogs-item-date">
                                                         {formatDate(blog.created_at)}
                                                     </div>

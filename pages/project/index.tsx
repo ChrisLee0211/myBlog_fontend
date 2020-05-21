@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Layout from '../../components/Layout';
 import {GetStaticProps} from 'next';
 import "./index.scss";
@@ -16,7 +16,7 @@ export const getStaticProps: GetStaticProps = async () => {
             id:1,
             name:"项目一",
             link:"www.hupu.com",
-            desc: "简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述"
+            desc: "简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述简单的项目描述"
         },
         {
             id:2,
@@ -38,13 +38,46 @@ export interface ComponentProps {
     projects: Project[]
 }
 
+interface ActiveItem extends Project {
+    active: boolean;
+}
+
 const Project: React.FC<ComponentProps> = (props: ComponentProps) => {
     const {projects} = props;
+    const projectList:ActiveItem[] = useMemo(() => {
+        return projects.map(v => {
+            let data: ActiveItem = {...v} as ActiveItem;
+            data["active"] = false;
+            return data
+        })
+    },[projects]);
+    const activeClass:string = "project-active ";
     return (
        <Layout>
            <div className="main-wrapper">
                 <div className="main-body">
-                    {projects[0].name}
+                    <section className="project-list">
+                        {
+                            projectList.map(project => {
+                                return (
+                                    <div 
+                                        key={project.id} 
+                                        className={project.active?`${activeClass} project-list-item`:`project-list-item`}
+                                        >
+                                            <header>
+                                                <h3 className="project-list-item-title">{project.name}</h3>
+                                                <span className="project-list-item-link">点击进入</span>
+                                            </header>
+                                            <div className="project-list-item-content" dangerouslySetInnerHTML={{__html:project.desc}}>
+                                            </div>
+                                            {
+                                                !project.active && <div className="loadmore">加载更多...</div>
+                                            }
+                                    </div>
+                                )
+                            })
+                        }
+                    </section>
                 </div>
            </div>
        </Layout>

@@ -3,6 +3,7 @@
     &-item {
         padding: 2vw;
         box-sizing: border-box;
+        min-height: 250px;
         height: 250px;
         overflow: hidden;
         position: relative;
@@ -28,6 +29,7 @@
         }
         &-link {
             cursor: pointer;
+            font-size: 12px;
         }
         &-content{
             margin-top: 5px;
@@ -51,4 +53,9 @@
             background: linear-gradient(rgba(255,255,255,0.7),rgba(255,255,255,0.9),rgba(255,255,255,0.99),rgba(255,255,255,1))
         }
     }
+}
+
+.project-active {
+    height: auto !important;
+    overflow: none !important;
 }

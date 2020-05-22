@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import Layout from '../../components/Layout';
 import {GetStaticProps} from 'next';
 import "./index.scss";
@@ -44,13 +44,24 @@ interface ActiveItem extends Project {
 
 const Project: React.FC<ComponentProps> = (props: ComponentProps) => {
     const {projects} = props;
-    const projectList:ActiveItem[] = useMemo(() => {
+    const projectArr:ActiveItem[] = useMemo(() => {
         return projects.map(v => {
             let data: ActiveItem = {...v} as ActiveItem;
             data["active"] = false;
             return data
         })
-    },[projects]);
+    },[projects])
+    const [projectList, setProjectList] = useState<ActiveItem[]>(projectArr)
+    const loadMore = useCallback((id) => {
+        let projects = projectArr.map(record => {
+            if(record.id === id){
+                record["active"] = true
+            };
+            return record
+        });
+        console.log(projects)
+        setProjectList(projects)
+    },[projectList])
     const activeClass:string = "project-active ";
     return (
        <Layout>
@@ -71,7 +82,7 @@ const Project: React.FC<ComponentProps> = (props: ComponentProps) => {
                                             <div className="project-list-item-content" dangerouslySetInnerHTML={{__html:project.desc}}>
                                             </div>
                                             {
-                                                !project.active && <div className="loadmore">加载更多...</div>
+                                                project.active === false ? <div className="loadmore" onClick={()=>{loadMore(project.id)}}>加载更多...</div> : null
                                             }
                                     </div>
                                 )

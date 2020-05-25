@@ -21,8 +21,7 @@ const Layout: React.FunctionComponent<Props> = ({
     </header>
     {children}
     <footer>
-      <hr />
-      <span>I'm here to stay (Footer)</span>
+      <div className="footer">&copy;2020-2020 ICP证: <a href="www.beian.miit.gov.cn">粤ICP备20034442号</a></div>
     </footer>
   </div>
 )

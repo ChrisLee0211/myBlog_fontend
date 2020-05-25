@@ -96,6 +96,15 @@
     }
 }
 
+// 页面底部样式
+.footer{
+    width: 100%;
+    height: 30px;
+    @include flexCenter;
+    text-indent: 10px;
+    font-size: 10px;
+}
+
 // 所有页面基础样式
 .main-wrapper {
     width     : 100vw;

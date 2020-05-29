@@ -29,6 +29,8 @@ class MyMobxApp extends App {
     this.mobxStore = isServer ? props.initialMobxState : initializeStore(props.initialMobxState)
   }
 
+
+
   render() {
     const {Component, pageProps}: any = this.props
     return (

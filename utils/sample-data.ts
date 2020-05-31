@@ -14,5 +14,5 @@ export const articleData: Article = {
   created_at: 1588949928642,
   quote: ["wwww.baidu.com"],
   author: "clee",
-  content: '# This is a header\n\nAnd this is a paragraph'
+  content: '# This is a header\n\nAnd this is a paragraph\n\n ```ts  const a="aab"  ```'
 }

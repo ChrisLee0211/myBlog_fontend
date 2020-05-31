@@ -1,9 +1,11 @@
 import React from 'react';
-import Layout from '../../components/Layout';
+import ReactMarkdown from 'react-markdown'
 import {GetStaticProps,GetStaticPaths} from 'next';
-import "./index.scss";
-import {articleData} from "../../utils/sample-data";
+import Layout from '../../components/Layout';
+import CodeBlock from '../../components/CodeBlock';
 import { parseTime } from '../../utils';
+import {articleData} from "../../utils/sample-data";
+import "./index.scss";
 export interface Article{
     id:number;
     title:string;
@@ -43,7 +45,10 @@ const ArticleContent: React.FC<ComponentProps> = (props: ComponentProps) => {
                     </section>
                     <section className="article-nav"></section>
                     <section className="article-body">
-                        {article.content}
+                        <ReactMarkdown 
+                            source={article.content} 
+                            renderers={{code:CodeBlock}}
+                            escapeHtml={false}/>
                     </section>
                 </div>
             </div>

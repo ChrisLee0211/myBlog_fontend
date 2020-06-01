@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactMarkdown from 'react-markdown'
 import {GetStaticProps,GetStaticPaths} from 'next';
 import Layout from '../../components/Layout';
@@ -32,6 +32,14 @@ export interface ComponentProps {
 
 const ArticleContent: React.FC<ComponentProps> = (props: ComponentProps) => {
     const { article }= props;
+    useEffect(()=>{
+        document.addEventListener("scroll",e => {
+            console.log(e)
+        });
+        return document.removeEventListener("scroll", e=> {
+            console.log(e)
+        })
+    },[])
     return (
         <Layout>
             <div className="main-wrapper">
@@ -43,12 +51,17 @@ const ArticleContent: React.FC<ComponentProps> = (props: ComponentProps) => {
                             <span className="article-header-baseInfo-date">创建时间：{parseTime(article.created_at)}</span>
                         </div>
                     </section>
-                    <section className="article-nav"></section>
+                    <section className="article-nav">
+                        {/* 导航栏 */}
+                    </section>
                     <section className="article-body">
                         <ReactMarkdown 
                             source={article.content} 
                             renderers={{code:CodeBlock}}
                             escapeHtml={false}/>
+                    </section>
+                    <section className="article-scrollTop">
+                        <img src="../../static/scrollTop.png" alt="" />
                     </section>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import xonokai from "react-syntax-highlighter/dist/cjs/styles/prism/atom-dark";
+import  xonokai  from "react-syntax-highlighter/dist/cjs/styles/hljs/vs";
 import javascript from 'react-syntax-highlighter/dist/cjs/languages/hljs/javascript';
 import jsx from 'react-syntax-highlighter/dist/cjs/languages/hljs/typescript';
 

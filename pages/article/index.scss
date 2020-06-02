@@ -22,7 +22,7 @@
     &-scrollTop {
         position: fixed;
         bottom: 20px;
-        right: 20px;
+        right: -5vh;
         width: 5vh;
         height: 5vh;
         border-radius: 50%;
@@ -36,5 +36,27 @@
             width: 100%;
             height: 100%;
         }
+    }
+}
+.scrollTop-active {
+    animation: scrollTopEnter .5s linear .2s 1 normal forwards;
+}
+@keyframes scrollTopEnter {
+    from {
+        right: -5vh;
+    }
+    to {
+        right: 20px;
+    }
+}
+.scrollTop-hidden {
+    animation: scrollTopLeave .5s linear .2s 1 normal forwards;
+}
+@keyframes scrollTopLeave {
+    from {
+        right: 20px;
+    }
+    to {
+        right: -5vh;
     }
 }

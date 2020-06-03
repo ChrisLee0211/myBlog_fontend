@@ -1,9 +1,9 @@
-import React, { useEffect,useState, useRef  } from 'react';
+import React, { useEffect,useState, useRef, useCallback  } from 'react';
 import ReactMarkdown from 'react-markdown'
 import {GetStaticProps,GetStaticPaths} from 'next';
 import Layout from '../../components/Layout';
 import CodeBlock from '../../components/CodeBlock';
-import { parseTime } from '../../utils';
+import { parseTime,debounce } from '../../utils';
 import {articleData} from "../../utils/sample-data";
 import "./index.scss";
 export interface Article{
@@ -32,20 +32,32 @@ export interface ComponentProps {
 
 const ArticleContent: React.FC<ComponentProps> = (props: ComponentProps) => {
     const { article }= props;
-    const [srollTopVisible,setScrollTopVisible] = useState<boolean>(false);
+    const [scrollTopClass, setScrollTopClass] = useState<string>("article-scrollTop")
     const wrapperRef = useRef<HTMLDivElement>(null);
     useEffect(()=>{
-        console.log(wrapperRef.current)
-        function watchScroll(e:any){
-            const scrollTop = e.target.scrollingElement.scrollTop;
+        
+        const toggleScrollTop:Function = (scrollTop:number) => {
             if(scrollTop > 10){
-                setScrollTopVisible(true)
+                setScrollTopClass("article-scrollTop scrollTop-active")
             }else{
-                setScrollTopVisible(false)
+                setScrollTopClass("article-scrollTop scrollTop-hidden")
             }
         }
+        const debounceFn = debounce(toggleScrollTop,100)
+        function watchScroll(e:any){
+            const scrollTop = e.target.scrollingElement.scrollTop;
+            debounceFn(scrollTop)
+        }
         document.addEventListener("scroll",watchScroll);
-        // return document.removeEventListener("scroll", watchScroll)
+        return ()=>{
+            document.removeEventListener("scroll", watchScroll)
+        }
+    },[]);
+
+    const jumpToTop = useCallback(()=>{
+        if(document.scrollingElement){
+            document.scrollingElement.scrollTop = 0
+        }
     },[])
     return (
         <Layout>
@@ -119,7 +131,9 @@ const ArticleContent: React.FC<ComponentProps> = (props: ComponentProps) => {
                             escapeHtml={false}/>
                     </section>
                     <div 
-                        className={srollTopVisible?"article-scrollTop scrollTop-active":"article-scrollTop"}>
+                        className={scrollTopClass}
+                        onClick={()=>{jumpToTop()}}
+                    >
                         <img src="../../static/scrollTop.png" alt="" />
                     </div>
                 </div>

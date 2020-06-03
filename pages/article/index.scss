@@ -39,7 +39,7 @@
     }
 }
 .scrollTop-active {
-    animation: scrollTopEnter .5s linear .2s 1 normal forwards;
+    right: 20px
 }
 @keyframes scrollTopEnter {
     from {
@@ -50,7 +50,7 @@
     }
 }
 .scrollTop-hidden {
-    animation: scrollTopLeave .5s linear .2s 1 normal forwards;
+    right: -5vh
 }
 @keyframes scrollTopLeave {
     from {

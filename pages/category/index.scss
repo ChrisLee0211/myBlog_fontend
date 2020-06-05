@@ -89,4 +89,36 @@
             }
         }
     }
+    &-slider{
+        position: fixed;
+        right: 40px;
+        bottom: 20px;
+        width: 15px;
+        height: 200px;
+        background: gray;
+        border-radius: 20px;
+        z-index: 1;
+        &-track{
+            position: fixed;
+            right: 40px;
+            bottom: 15px;
+            width: 30px;
+            height: 200px;
+            border-radius: 20px;
+            z-index: 2;
+        }
+        &-slideBar{
+            height: 100%;
+            position: relative;
+            &-thumb{
+                position: absolute;
+                top: -20px;
+                left: -10px;
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                background: black;
+            }
+        }
+    }
 }

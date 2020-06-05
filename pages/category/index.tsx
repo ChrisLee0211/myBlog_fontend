@@ -80,7 +80,7 @@ const FComponent: React.FC<ComponentProps> = (props: ComponentProps) => {
                     <section className="category-content-list">
                         {category.map(item => {
                             return (
-                                <div className="category-content-list-item">
+                                <div key={JSON.stringify(item)} className="category-content-list-item">
                                     <div className="category-content-list-item-year">{item.year}</div>
                                     <div className="category-content-list-item-blogs">
                                         {item.blogs.map(blog => {
@@ -101,6 +101,12 @@ const FComponent: React.FC<ComponentProps> = (props: ComponentProps) => {
                             )
                         })}    
                     </section>
+                    <section className="category-content-slider">
+                        <div className="category-content-slider-track"></div>
+                        <div className="category-content-slider-slideBar">
+                            <div className="category-content-slider-slideBar-thumb"></div>
+                        </div>
+                    </section>    
                 </div>
             </div>
         </Layout>

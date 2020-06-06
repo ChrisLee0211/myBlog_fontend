@@ -2,6 +2,7 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 import Layout from '../../components/Layout'
 import { formatDate } from '../../utils';
+import {useSlider} from "../../utils/hook/useSlider"
 import "./index.scss";
 
 interface Tags {
@@ -60,6 +61,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const FComponent: React.FC<ComponentProps> = (props: ComponentProps) => {
     const {tags, category} = props;
+    const [track,thumb,clickTrack,clickThumb,ratio] = useSlider({horizon:false,initState:0});
     return (
         <Layout>
             <div className="main-cover">
@@ -102,9 +104,9 @@ const FComponent: React.FC<ComponentProps> = (props: ComponentProps) => {
                         })}    
                     </section>
                     <section className="category-content-slider">
-                        <div className="category-content-slider-track"></div>
-                        <div className="category-content-slider-slideBar">
-                            <div className="category-content-slider-slideBar-thumb"></div>
+                        <div className="category-content-slider-track" ref={track} onMouseDown={clickTrack}></div>
+                        <div className="category-content-slider-slideBar" style={{height:`${(ratio as number)*100}%`}}>
+                            <div className="category-content-slider-slideBar-thumb" ref={thumb} onMouseDown={clickThumb}></div>
                         </div>
                     </section>    
                 </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { GetStaticProps } from 'next';
 import Layout from '../../components/Layout'
 import { formatDate } from '../../utils';
@@ -62,6 +62,13 @@ export const getStaticProps: GetStaticProps = async () => {
 const FComponent: React.FC<ComponentProps> = (props: ComponentProps) => {
     const {tags, category} = props;
     const [track,thumb,clickTrack,clickThumb,ratio] = useSlider({horizon:false,initState:0});
+    const articleNum = useMemo(()=>{
+        if(category.length<1) return 0;
+        let total = category.reduce((last,cur)=>{
+            return last + cur.blogs.length;
+        },category[0].blogs.length);
+        return total
+    }, [category])
     return (
         <Layout>
             <div className="main-cover">
@@ -107,6 +114,15 @@ const FComponent: React.FC<ComponentProps> = (props: ComponentProps) => {
                         <div className="category-content-slider-track" ref={track} onMouseDown={clickTrack}></div>
                         <div className="category-content-slider-slideBar" style={{height:`${(ratio as number)*100}%`}}>
                             <div className="category-content-slider-slideBar-thumb" ref={thumb} onMouseDown={clickThumb}></div>
+                        </div>
+                        <div className="category-content-slider-dateBar">
+                            {category.map((item) => {
+                                <div className="dateBlock"
+                                    style={{height:`${(item.blogs.length/articleNum)*100}%`}}
+                                >
+                                       {`${item.year}  -`}
+                                </div>
+                            })}
                         </div>
                     </section>    
                 </div>

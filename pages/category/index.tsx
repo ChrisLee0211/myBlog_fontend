@@ -2,7 +2,8 @@ import React, { useMemo, useEffect, useState } from 'react';
 import { GetStaticProps } from 'next';
 import Layout from '../../components/Layout'
 import { formatDate, debounce } from '../../utils';
-import { useSlider } from "../../utils/hook/useSlider"
+import { useSlider } from "../../utils/hook/useSlider";
+import {useDebounceValue} from "../../utils/hook/useDebounceVal";
 import "./index.scss";
 
 interface Tags {
@@ -63,6 +64,7 @@ const FComponent: React.FC<ComponentProps> = (props: ComponentProps) => {
     const { tags, category } = props;
     const [firstRender,setFirstRender] = useState<boolean>(true)
     const [track, thumb, clickTrack, clickThumb, ratio] = useSlider({ horizon: false, initState: 0 });
+    const debounceRatio = useDebounceValue(ratio,300)
     const articleNum = useMemo(() => {
         if (category.length < 1) return 0;
         let total = category.reduce((last, cur) => {
@@ -74,17 +76,17 @@ const FComponent: React.FC<ComponentProps> = (props: ComponentProps) => {
         if(firstRender) {
             setFirstRender(false);
             return
-        }else{
+        }
+        else{
             const scrollToYear:(percent:number)=>void = (percent) => {
                 const doc = document.body;
-                console.log("document.body;",document.body)
-                const pageHeight = doc.scrollTop;
-                doc.scrollTop = pageHeight*(percent/100)
+                const pageHeight = doc.scrollHeight;
+                document.documentElement.scrollTop=pageHeight*(percent)
             }
             const debounceFn = debounce(scrollToYear,100);
-            debounceFn(ratio)
+            debounceFn(debounceRatio)
         }
-    },[ratio])
+    },[debounceRatio])
     return (
         <Layout>
             <div className="main-cover">
